@@ -7,9 +7,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
@@ -63,6 +61,9 @@ public class MySuperBot extends TelegramLongPollingBot {
             }
             if(isAdminCreateCommand(text)){
                 createAdmin(text, chatId);
+            }
+            if(isAdmin(chatId) && isGetUsersLinkCommand(text)){
+                getUsersLink(chatId);
             }
 
             // pattern State
@@ -146,6 +147,13 @@ public class MySuperBot extends TelegramLongPollingBot {
     private boolean isAdminCreateCommand(String text) {
         return text.startsWith("/create admin ");
     }
+    private boolean isGetUsersLinkCommand(String text){
+        return text.startsWith("/get users ");
+    }
+    private boolean isAdmin(long chatId){
+        User user = userService.findUserByChatId(chatId).get();
+        return user.getAdmin();
+    }
 
     private void deleteUser(long chatId) {
         User user = userService.findUserByChatId(chatId).get();
@@ -169,6 +177,9 @@ public class MySuperBot extends TelegramLongPollingBot {
             sendMessage(chatId, "Unknown command");
         }
 
+    }
+    private String getUsersLink(long chatId){
+        return "/admin/" + chatId + "/users";
     }
 
     private void sendMessage(long chatId, String message) {
