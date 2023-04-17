@@ -39,12 +39,20 @@ public class UserService {
     public Optional<User> findUserByChatId(long chatId) {
         return userRepository.findByChatId(chatId);
     }
+
     @Transactional
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         userRepository.delete(user);
     }
+
     @Transactional
-    public Optional<User> findUserByName(String name){
+    public Optional<User> findUserByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    @Transactional
+    public List<User> getUsers(Pageable pageable) {
+        List<User> users = userRepository.findAll(pageable).getContent();
+        return users;
     }
 }
