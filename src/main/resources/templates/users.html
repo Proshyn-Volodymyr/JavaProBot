@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>users</title>
+</head>
+<body>
+<main>
+    <table id="users-table" class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody id="users-table-content"></tbody>
+    </table>
+    <button id="fetch-users-button" type="button" onclick="myFunction()">FETCH USERS</button>
+</main>
+<script type="text/javascript" th:src="@{/js/admin.js}"></script>
+</body>
+</html>
