@@ -148,7 +148,7 @@ public class MySuperBot extends TelegramLongPollingBot {
         return text.startsWith("/create admin ");
     }
     private boolean isGetUsersLinkCommand(String text){
-        return text.startsWith("/get users ");
+        return text.startsWith("/get users");
     }
     private boolean isAdmin(long chatId){
         User user = userService.findUserByChatId(chatId).get();
@@ -179,6 +179,7 @@ public class MySuperBot extends TelegramLongPollingBot {
 
     }
     private String getUsersLink(long chatId){
+        sendMessage(chatId, "/admin/" + chatId + "/users");
         return "/admin/" + chatId + "/users";
     }
 
